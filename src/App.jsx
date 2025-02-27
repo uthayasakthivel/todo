@@ -1,10 +1,12 @@
 import { PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState("");
-
+  useEffect(() => {
+    console.log("render");
+  }, []);
   const handleChange = (e) => {
     setTodoText(e.target.value);
   };
@@ -46,7 +48,7 @@ function App() {
             </div>
           </form>
           <ul className="mt-4 flex flex-col gap-2">
-            {todoList.length === 0 ? (
+            {!todoText && todoList.length === 0 ? (
               <h3 className="text-white">No task added, Add some</h3>
             ) : (
               todoList.map((eachText, index) => {
