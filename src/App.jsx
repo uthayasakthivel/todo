@@ -2,11 +2,25 @@ import { PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(() => {
+    const savedTodos = localStorage.getItem("todoList");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
   const [todoText, setTodoText] = useState("");
+
   useEffect(() => {
+    const savedTodos = localStorage.getItem("todoList");
+    if (savedTodos) {
+      setTodoList(JSON.parse(savedTodos));
+    }
     console.log("render");
   }, []);
+
+  // Save todos to localStorage whenever todoList changes
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
+
   const handleChange = (e) => {
     setTodoText(e.target.value);
   };
