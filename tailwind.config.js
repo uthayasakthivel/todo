@@ -37,7 +37,7 @@ export default {
         verdana: ["Verdana"],
       },
       backgroundImage: {
-        "hero-pattern": "url('./src/assets/images/mountain-day.jpg')",
+        "hero-pattern": "url('/images/mountain-day.jpg')",
 
         // Day Mode Gradients
         "btn-gradient-green":
