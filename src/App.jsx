@@ -22,22 +22,24 @@ function App() {
   }, [todoList]);
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setTodoText(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (todoText.trim() === "") return;
-    setTodoList((prevTexts) => {
-      return [...prevTexts, todoText];
+    setTodoList((prevTodos) => {
+      const todo = { id: Date.now(), todoText };
+      return [...prevTodos, todo];
     });
     setTodoText("");
   };
 
-  const handleDelete = (itemIndex) => {
+  const handleDelete = (selectedTodoId) => {
     setTodoList(
       todoList.filter((eachTodo) => {
-        return todoList.indexOf(eachTodo) !== itemIndex;
+        return eachTodo.id !== selectedTodoId;
       })
     );
   };
@@ -65,17 +67,17 @@ function App() {
             {!todoText && todoList.length === 0 ? (
               <h3 className="text-white">No task added, Add some</h3>
             ) : (
-              todoList.map((eachText, index) => {
+              todoList.map((eachTodo) => {
                 return (
                   <li
                     className="p-2 rounded-md bg-glass-bg flex justify-between items-center"
-                    key={index}
+                    key={eachTodo.id}
                   >
-                    <h3 className="text-white">{eachText}</h3>
+                    <h3 className="text-white">{eachTodo.todoText}</h3>
                     <XMarkIcon
                       className="h-6 w-6 text-pink cursor-pointer "
                       onClick={() => {
-                        handleDelete(index);
+                        handleDelete(eachTodo.id);
                       }}
                     />
                   </li>
