@@ -10,13 +10,13 @@ export const ThemeProvider = ({ children }) => {
     return savedTheme ? JSON.parse(savedTheme) : false;
   });
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setDarkMode(JSON.parse(savedTheme));
-    }
-    console.log(darkMode);
-  }, []);
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("theme");
+  //   if (savedTheme) {
+  //     setDarkMode(JSON.parse(savedTheme));
+  //   }
+  //   console.log(darkMode);
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(darkMode));
